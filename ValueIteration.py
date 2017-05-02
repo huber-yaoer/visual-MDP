@@ -50,13 +50,13 @@ class VI:
 
         return self.values, self.policy
 
-def vi_wrapper(reward, lava, discount):
+def vi_wrapper(reward, lava, gamma):
     world, terminal = generator.make_env(0,reward,lava)
     mdp = MDP(world, terminal)
-    vi = VI(mdp, discount)
+    vi = VI(mdp, gamma)
     values, policy = vi.iterate(iterations=20, visualize=False)
     fig = visualize_values( mdp, values, policy, \
-                            title='Reward: ' + str(reward) + '   Lava: ' + str(lava) + '    Gamma: ' + str(discount), \
+                            title='Reward: ' + str(reward) + '   Lava: ' + str(lava) + '    Gamma: ' + str(gamma), \
                             vmin=-8, vmax=5 )
     display.display(fig)
     display.clear_output(wait=True)
