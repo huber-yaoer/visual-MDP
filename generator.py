@@ -17,17 +17,34 @@ terminal[-1,-1] = 1
 
 default_env = {'rewards': world, 'terminal': terminal}
 
+# def make_env(reward_location, reward_value, lava_value):
+# 	dim = 10
+
+# 	world = np.ones((dim, dim)) * lava_value
+# 	world[-2:,:] = 0
+# 	world[:2,:] = 0
+# 	world[:,:1] = 0
+
+# 	world[0,-1] = reward_value
+
+# 	terminal = np.zeros((dim,dim))
+# 	terminal[0,-1] = 1
+# 	return world, terminal
+
 def make_env(reward_location, reward_value, lava_value):
-	dim = 10
+    dim = 10
 
-	world = np.ones((dim, dim)) * lava_value
-	world[-2:,:] = 0
-	world[:2,:] = 0
-	world[:,:1] = 0
+    world = np.zeros((dim, dim))
+    world[2:-2,3:5] = lava_value
+    world[2,3:7] = lava_value
+    world[-2,3:7] = lava_value
+    world[:2,6] = lava_value
+    # world[:2,:] = 0
+    # world[:,:1] = 0
 
-	world[0,-1] = reward_value
+    world[5,6] = reward_value
 
-	terminal = np.zeros((dim,dim))
-	terminal[0,-1] = 1
-	return world, terminal
+    terminal = np.zeros((dim,dim))
+    terminal[5,6] = 1
+    return world, terminal
 

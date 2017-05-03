@@ -57,7 +57,7 @@ def vi_wrapper(reward, lava, gamma):
     values, policy = vi.iterate(iterations=20, visualize=False)
     fig = visualize_values( mdp, values, policy, \
                             title='Reward: ' + str(reward) + '   Lava: ' + str(lava) + '    Gamma: ' + str(gamma), \
-                            vmin=-8, vmax=5 )
+                            vmin=-6, vmax=8 )
     display.display(fig)
     display.clear_output(wait=True)
 
