@@ -10,6 +10,9 @@ class VI:
     def __init__(self, mdp, discount = 0.9):
         self.refresh(mdp, discount)
 
+    '''
+    clear values and policy
+    '''
     def refresh(self, mdp, discount):
         self.mdp = mdp
         self.states = mdp.getStates()
@@ -21,7 +24,10 @@ class VI:
         self.policy = {state: None for state in self.states}
         self.discount = discount
 
-
+    '''
+    runs value iteration on self.MDP
+    if visualize, will refresh figure after every iteration
+    '''
     def iterate(self, iterations=50, visualize=True):
         self.refresh(self.mdp, self.discount)
         for k in range(0, iterations):
@@ -39,20 +45,23 @@ class VI:
                             self.policy[state] = action
                 self.values[state] = max_val
             
-            if visualize:# or k == iterations - 1:
+            if visualize:
                 fig = visualize_values(self.mdp, self.values, self.policy, title='Iteration ' + str(k))
                 display.clear_output(wait=True)
                 display.display(fig)
                 time.sleep(0.1)
         if visualize:
             display.clear_output(wait=True)
-        # return fig
 
         return self.values, self.policy
 
+'''
+creates environment with specified reward value, 
+lava penalty, and gamma, then runs value iteration
+'''
 def vi_wrapper(reward, lava, gamma):
-    world, terminal = generator.make_env(0,reward,lava)
-    mdp = MDP(world, terminal)
+    rewards, terminal = generator.make_small_env(reward_value=reward, lava_value=lava)
+    mdp = MDP(rewards, terminal)
     vi = VI(mdp, gamma)
     values, policy = vi.iterate(iterations=20, visualize=False)
     fig = visualize_values( mdp, values, policy, \

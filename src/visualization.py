@@ -1,11 +1,12 @@
 import numpy as np, scipy.misc
-# import matplotlib
-# matplotlib.use('webagg')
 from matplotlib import pyplot as plt
 
+'''
+returns a heatmap of values with arrows pointing to the best
+neighboring state at each position
+'''
 def visualize_values(mdp, values, policy, filename=None, title=None, vmin=None, vmax=None):
     states = mdp.states
-    # print states
     plt.clf()
     m = max(states, key=lambda x: x[0])[0] + 1
     n = max(states, key=lambda x: x[1])[1] + 1
@@ -16,7 +17,6 @@ def visualize_values(mdp, values, policy, filename=None, title=None, vmin=None, 
             if type(values) == dict:
                 data[i][j] = values[state]
             else:
-                # print values[i][j]
                 data[i][j] = values[i][j]
             action = policy[state]
             ## if using all_reachable actions, pick the best one
@@ -41,6 +41,11 @@ def visualize_values(mdp, values, policy, filename=None, title=None, vmin=None, 
 
     return fig
 
+'''
+helper function to return parameters of arrow
+at position (i,j) for specified action
+action is index into ['up', 'down', 'left', 'right']
+'''
 def arrow(i, j, action):
     ## up, down, left, right
     ## x, y, w, h
@@ -48,11 +53,17 @@ def arrow(i, j, action):
     arrow = arrows[action]
     return j+arrow[0], i+arrow[1], arrow[2], arrow[3]
 
+
 def read_img(path, cell_dim):
     img = scipy.misc.imread(path)
     img = scipy.misc.imresize(img, (cell_dim, cell_dim))
     return img
 
+'''
+visualizes map with sprites
+rewards and terminal are same as arguments to MDP
+each sprite is scaled to cell_dim
+'''
 def visualize_map(rewards, terminal, cell_dim=100):
     grass = read_img('sprites/grass.png', cell_dim)
     lava = read_img('sprites/lava.png', cell_dim)
