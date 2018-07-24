@@ -1,4 +1,4 @@
-# Interactive value iteration demo
+# 马尔科夫决策过程动态规划值迭代交互式演示
 
 To run: `ipython notebook main.ipynb`
 

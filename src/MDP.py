@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import numpy as np
 
 class MDP:
@@ -6,6 +7,7 @@ class MDP:
     rewards and terminal are np arrays of the same shape
     rewards gives value of each state
     terminal is binary denoting whether a given state is terminal
+    确定地图（环境）情况
     '''
     def __init__(self, rewards, terminal):
         self.reward_map = rewards
@@ -14,9 +16,9 @@ class MDP:
 
         self.M, self.N = self.shape
         self.states = [(i,j) for i in range(self.M) for j in range(self.N)]
-        self.children = self.get_children( self.M, self.N )
+        self.children = self.get_children( self.M, self.N )#孩子为考虑边界后的4邻域，即得到可走的下一个状态或位置的集合
 
-        self.actions = [(-1,0),(1,0),(0,-1),(0,1)]
+        self.actions = [(-1,0),(1,0),(0,-1),(0,1)] #上下左右
         self.states = [(i,j) for i in range(self.shape[0]) for j in range(self.shape[1])]
 
     '''
@@ -79,6 +81,7 @@ class MDP:
     and children is a list of states neighboring pos
     '''
     def get_children(self, M, N):
+        #孩子为考虑边界后的4邻域，即得到可走的下一个状态或位置的集合
         children = {}
         for i in range(M):
             for j in range(N):
@@ -96,6 +99,7 @@ class MDP:
     values is M x N map of predicted values
     '''
     def get_policy(self, values):
+        #根据收益地图确定下一个状态，选择收益最大的一个
         policy = {}
         for state in self.states:
             reachable = self.children[state]

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from MDP import MDP
 from visualization import visualize_values
 import matplotlib.pyplot as plt
@@ -16,19 +17,20 @@ class VI:
     def refresh(self, mdp, discount):
         self.mdp = mdp
         self.states = mdp.getStates()
-        self.actions = mdp.getActions()
-        self.transition = mdp.transition
-        self.reward = mdp.reward
-        self.terminal = mdp.terminal
+        self.actions = mdp.getActions() #赋值（变量）
+        self.transition = mdp.transition #赋能（函数）
+        self.reward = mdp.reward #赋能（函数）
+        self.terminal = mdp.terminal #赋能（函数）
         self.values = {state: 0 for state in self.states}
         self.policy = {state: None for state in self.states}
-        self.discount = discount
+        self.discount = discount #折现率
 
     '''
     runs value iteration on self.MDP
     if visualize, will refresh figure after every iteration
     '''
     def iterate(self, iterations=50, visualize=True):
+        #动态规划，须知道环境所有信息，每轮迭代，更新所有值，每个状态只考虑下一个状态，不考虑下下个状态。
         self.refresh(self.mdp, self.discount)
         for k in range(0, iterations):
             for state in self.states:
