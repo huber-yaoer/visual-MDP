@@ -10,4 +10,4 @@ To run: `ipython notebook main.ipynb`
 </p>
 ***
 
-## QLearn
+## QLearning演示
