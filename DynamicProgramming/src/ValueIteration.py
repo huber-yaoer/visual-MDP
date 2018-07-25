@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from MDP import MDP
-from visualization import visualize_values
+from DynamicProgramming.src.MDP import MDP
+from DynamicProgramming.src.visualization import visualize_values
 import matplotlib.pyplot as plt
 from IPython import display
 import time
-import generator
+from DynamicProgramming.src.generator import *
 
 class VI:
 
@@ -62,7 +62,7 @@ creates environment with specified reward value,
 lava penalty, and gamma, then runs value iteration
 '''
 def vi_wrapper(reward, lava, gamma):
-    rewards, terminal = generator.make_small_env(reward_value=reward, lava_value=lava)
+    rewards, terminal = make_small_env(reward_value=reward, lava_value=lava)
     mdp = MDP(rewards, terminal)
     vi = VI(mdp, gamma)
     values, policy = vi.iterate(iterations=20, visualize=False)

@@ -66,9 +66,10 @@ rewards and terminal are same as arguments to MDP
 each sprite is scaled to cell_dim
 '''
 def visualize_map(rewards, terminal, cell_dim=100):
-    grass = read_img('sprites/grass.png', cell_dim)
-    lava = read_img('sprites/lava.png', cell_dim)
-    candy = read_img('sprites/candy.png', cell_dim)
+    #grass = read_img('s/grass.png', cell_dim)
+    grass = read_img('DynamicProgramming/sprites/grass.png', cell_dim)
+    lava = read_img('DynamicProgramming/sprites/lava.png', cell_dim)
+    candy = read_img('DynamicProgramming/sprites/candy.png', cell_dim)
 
     grass_mask = rewards >= 0
     candy_mask = terminal > 0

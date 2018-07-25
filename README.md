@@ -11,3 +11,8 @@ To run: `ipython notebook main.ipynb`
 ***
 
 ## QLearning演示
+
+<p align="center">
+  <img src="examples/MazeRuning.png" align="center" width="800">
+</p>
+***
